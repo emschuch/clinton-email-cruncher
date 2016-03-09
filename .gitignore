@@ -1,6 +1,9 @@
 pdfs/
+rawText
 virt-hrcemail/
 *.sqlite
 *.pyc
 pdflist.txt
 *.zip
+*.csv
+*.ipynb

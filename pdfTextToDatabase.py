@@ -15,15 +15,20 @@ from hrcemail_common import *
 import string
 import slate
 import sys
+from subprocess import call
+import codecs
 
 def extract(filename):
 	try:
-		file = open('pdfs/'+filename+'.pdf', 'rb')
+		# file = open('pdfs/'+filename+'.pdf', 'rb')
+		call(["pdftotext", 
+              "-raw",
+              'pdfs/'+filename+'.pdf',
+              'rawText/'+filename+'.txt'])
 	except:
 		return None;
 	try:
-		#this removes non-ASCII characters. Might not be desirable in some circumstances.
-		return filter(lambda x: x in string.printable,"\n".join(slate.PDF(file)))
+		return codecs.open('rawText/'+filename+'.txt', encoding='utf-8', errors='replace').read().replace('\n', ' ')
 	except:
 		return None;
 		
